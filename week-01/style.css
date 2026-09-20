@@ -5,12 +5,10 @@
   padding: 20px;
   /* border: card-тың жиегі */
   border: 2px solid #444;
-  border-radius: 12px;
   max-width: 600px;
 
   /* Flexbox: сурет пен мәтін қатар тұрады */
   display: flex;
-  gap: 20px;
   align-items: center;
 }
 
