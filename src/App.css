@@ -1,13 +1,9 @@
 .card {
-  /* margin: card-тың сыртқы бос орны, жоғарыдан/төменнен 24px, ортасына автоматты */
   margin: 24px auto;
-  /* padding: card ішіндегі мазмұн мен жиек арасындағы бос орын */
   padding: 20px;
-  /* border: card-тың жиегі */
   border: 2px solid #444;
   max-width: 600px;
 
-  /* Flexbox: сурет пен мәтін қатар тұрады */
   display: flex;
   align-items: center;
 }
@@ -26,7 +22,7 @@
   flex-wrap: wrap;
 }
 
-/* Адаптивтілік: тар экранда сурет пен мәтін тік орналасады */
+
 @media (max-width: 600px) {
   .card {
     flex-direction: column;
