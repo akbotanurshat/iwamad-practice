@@ -1,0 +1,42 @@
+.card {
+  /* margin: card-тың сыртқы бос орны, жоғарыдан/төменнен 24px, ортасына автоматты */
+  margin: 24px auto;
+  /* padding: card ішіндегі мазмұн мен жиек арасындағы бос орын */
+  padding: 20px;
+  /* border: card-тың жиегі */
+  border: 2px solid #444;
+  max-width: 600px;
+
+  /* Flexbox: сурет пен мәтін қатар тұрады */
+  display: flex;
+  align-items: center;
+}
+
+.card img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.card-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Адаптивтілік: тар экранда сурет пен мәтін тік орналасады */
+@media (max-width: 600px) {
+  .card {
+    flex-direction: column;
+    text-align: center;
+  }
+  .card-links {
+    justify-content: center;
+  }
+}
+
+.card.liked {
+  background-color: #ffe4ec;
+}
