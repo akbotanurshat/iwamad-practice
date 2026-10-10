@@ -1,22 +1,23 @@
-import LikeButton from './LikeButton';
+import { Card } from './ui/Card'
+import LikeButton from './LikeButton'
 
 type ProfileCardProps = {
-  name: string;
-  role: string;
-  avatarUrl?: string;
-};
+  name: string
+  role: string
+  avatarUrl?: string
+}
 
 function ProfileCard({ name, role, avatarUrl }: ProfileCardProps) {
   return (
-    <section className="card">
+    <Card>
       {avatarUrl && <img src={avatarUrl} alt={name} />}
       <div>
         <h2>{name}</h2>
         <p>{role}</p>
         <LikeButton />
       </div>
-    </section>
-  );
+    </Card>
+  )
 }
 
-export default ProfileCard;
+export default ProfileCard
