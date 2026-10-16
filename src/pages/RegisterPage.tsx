@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent, type SubmitEvent } from 'react'
+import { useState, type ChangeEvent, type SubmitEvent, type FocusEvent } from 'react'
 import { validateRegistration, type RegistrationValues } from '../lib/validateRegistration'
 import { Button } from '../components/ui/Button'
 import { TextField } from '../components/ui/TextField'
@@ -12,6 +12,10 @@ export default function RegisterPage() {
     acceptTerms: false,
   })
 
+  const [touched, setTouched] = useState<Partial<Record<keyof RegistrationValues, boolean>>>({})
+  const [submitAttempted, setSubmitAttempted] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const { name, type, value, checked } = event.target
     setValues((current) => ({
@@ -20,16 +24,20 @@ export default function RegisterPage() {
     }))
   }
 
+  function handleBlur(event: FocusEvent<HTMLInputElement>) {
+    const { name } = event.target
+    setTouched((t) => ({ ...t, [name]: true }))
+  }
+
   function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault()
+    setSubmitAttempted(true)
     const errors = validateRegistration(values)
     if (Object.keys(errors).length > 0) {
       return
     }
     setSubmitted(true)
   }
-
-  const [submitted, setSubmitted] = useState(false)
 
   const errors = validateRegistration(values)
 
@@ -47,7 +55,8 @@ export default function RegisterPage() {
         type="text"
         value={values.fullName}
         onChange={handleChange}
-        error={errors.fullName}
+        onBlur={handleBlur}
+        error={touched.fullName || submitAttempted ? errors.fullName : undefined}
       />
 
       <TextField
@@ -56,7 +65,8 @@ export default function RegisterPage() {
         type="email"
         value={values.email}
         onChange={handleChange}
-        error={errors.email}
+        onBlur={handleBlur}
+        error={touched.email || submitAttempted ? errors.email : undefined}
       />
 
       <TextField
@@ -65,7 +75,8 @@ export default function RegisterPage() {
         type="password"
         value={values.password}
         onChange={handleChange}
-        error={errors.password}
+        onBlur={handleBlur}
+        error={touched.password || submitAttempted ? errors.password : undefined}
       />
 
       <TextField
@@ -74,7 +85,8 @@ export default function RegisterPage() {
         type="password"
         value={values.confirmPassword}
         onChange={handleChange}
-        error={errors.confirmPassword}
+        onBlur={handleBlur}
+        error={touched.confirmPassword || submitAttempted ? errors.confirmPassword : undefined}
       />
 
       <div className="check">
@@ -84,10 +96,13 @@ export default function RegisterPage() {
           type="checkbox"
           checked={values.acceptTerms}
           onChange={handleChange}
+          onBlur={handleBlur}
         />
         <label htmlFor="acceptTerms">I accept the terms</label>
       </div>
-      {errors.acceptTerms && <p className="field-error">{errors.acceptTerms}</p>}
+      {(touched.acceptTerms || submitAttempted) && errors.acceptTerms && (
+        <p className="field-error">{errors.acceptTerms}</p>
+      )}
 
       <Button type="submit">Create account</Button>
     </form>
