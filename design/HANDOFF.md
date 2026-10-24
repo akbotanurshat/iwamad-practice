@@ -22,11 +22,12 @@
 ## PostCard layout
 - direction: column
 - gap: 12px
-- padding: var(--space-4)
-- radius: var(--radius-md)
+- padding: 16px
+- radius: 8px (using var(--radius-md))
 - width: 320px
 - background: var(--color-surface)
 - border: 1px solid var(--color-border)
+- **Note:** Only `color/text-muted` should change for this component. All other values must be taken directly from the Figma file.
 
 ## Breakpoint change
 - phone (default): 1 column, header stacked
@@ -37,10 +38,10 @@
 - color/primary    → #1d4ed8
 - color/surface    → #FFFFFF
 - color/border     → #D1D5DB
-- color/text       → #111827
+- color/text       → #1f2937
 - color/text-muted → #6B7280
 - space/1          → 4px
 - space/2          → 8px
 - space/4          → 16px
 - space/8          → 32px
-- radius/md        → 12px
+- radius/md        → 8px
